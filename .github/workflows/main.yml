@@ -56,5 +56,6 @@ jobs:
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.7
       with:
+        GITHUB_TOKEN: ${{ secrets.GH_PAGES_TOKEN }}
         BRANCH: gh-pages
         FOLDER: AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/
