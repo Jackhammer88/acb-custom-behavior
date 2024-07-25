@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:AvaloniaControls.WebAssembly.ViewModels"
+             xmlns:acbHelpers="clr-namespace:AcbHelpers;assembly=AcbHelpers"
+             xmlns:models="clr-namespace:AvaloniaControls.WebAssembly.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaControls.WebAssembly.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+      <vm:MainViewModel />
+  </Design.DataContext>
+
+  <Grid RowDefinitions="Auto,*,*" VerticalAlignment="Center">
+        <TextBlock Text="Тестирование поведения контрола" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Grid Grid.Row="1" Width="600" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <AutoCompleteBox x:Name="ACB" ItemsSource="{Binding Items}"
+                             FilterMode="Contains"
+                             ValueMemberBinding="{Binding (models:TestModel).Name}"/>
+            <Canvas>
+                <Button Background="Transparent"
+                        VerticalAlignment="Center"
+                        Height="{Binding ElementName=ACB, Path=Bounds.Height}"
+                        Canvas.Right="30"
+                        Canvas.Top="{Binding ElementName=ACB, Path=Bounds.Top}"
+                        Canvas.Bottom="{Binding ElementName=ACB, Path=Bounds.Bottom}"
+                        acbHelpers:ButtonAcbCleanerExtensions.TargetAutoCompleteBox="{Binding ElementName=ACB}">
+                    <Canvas Width="20" Height="20">
+                        <Ellipse Fill="#B22222" Width="20" Height="20" />
+                        <Path Data="M 6 6 L 14 14 M 14 6 L 6 14" Stroke="Black" StrokeThickness="2" />
+                    </Canvas>
+                </Button>
+                <Button Background="Transparent"
+                        VerticalAlignment="Center"
+                        Height="{Binding ElementName=ACB, Path=Bounds.Height}"
+                        Canvas.Right="0"
+                        Canvas.Top="{Binding ElementName=ACB, Path=Bounds.Top}"
+                        Canvas.Bottom="{Binding ElementName=ACB, Path=Bounds.Bottom}"
+                        acbHelpers:ButtonAcbHelperExtensions.TargetAutoCompleteBox="{Binding ElementName=ACB}">
+                    <Path Data="M 0 0 L 10 0 L 5 5 Z" Fill="Black" Width="10" Height="5" Margin="5,0,0,0" Cursor="Hand"
+                          VerticalAlignment="Center" />
+                </Button>
+            </Canvas>
+        </Grid>
+        
+        <Grid Grid.Row="2" HorizontalAlignment="Center" RowDefinitions="Auto,*">
+            <TextBlock Text="Выбрано:" FontSize="30" HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="1"
+                FontSize="30"
+                Text="{Binding ElementName=ACB, Path=((models:TestModel)SelectedItem).Name}" />
+        </Grid>
+    </Grid>
+</UserControl>
