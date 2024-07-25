@@ -45,7 +45,7 @@ jobs:
       run: DotNetCompress -d AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/ -p '*.wasm' --format gz --threads 4
 
     - name: Change base-tag in index.html from / to XamlPlayground
-      run: sed -i 's/<base href="\/" \/>/<base href="\/" \/>/g' AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/index.html
+      run: sed -i 's/<base href="\/" \/>/<base href="\/AvaloniaControls.WebAssembly\/" \/>/g' AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/index.html
 
     - name: copy index.html to 404.html
       run: cp AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/index.html AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/404.html
