@@ -24,7 +24,7 @@ jobs:
       run: dotnet tool install --global DotNetCompress --version 3.0.0 --no-cache
 
     - name: Publish .NET Project
-      run: dotnet publish dotnet publish AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/AvaloniaControls.WebAssembly.Browser.csproj -c Release -o release --nologo
+      run: dotnet publish AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/AvaloniaControls.WebAssembly.Browser.csproj -c Release -o release --nologo
 
     - name: Brotli Compress Output (dll)
       run: DotNetCompress -d dotnet publish AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/managed -p '*.dll' --format br --threads 4
