@@ -24,38 +24,38 @@ jobs:
       run: dotnet tool install --global DotNetCompress --version 3.0.0 --no-cache
 
     - name: Publish .NET Project
-      run: dotnet publish src/XamlPlayground.Browser/XamlPlayground.Browser.csproj -c Release -o release --nologo
+      run: dotnet publish dotnet publish AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/AvaloniaControls.WebAssembly.Browser.csproj -c Release -o release --nologo
 
     - name: Brotli Compress Output (dll)
-      run: DotNetCompress -d src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/managed -p '*.dll' --format br --threads 4
+      run: DotNetCompress -d dotnet publish AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/managed -p '*.dll' --format br --threads 4
 
     - name: Brotli Compress Output (js)
-      run: DotNetCompress -d src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/ -p '*.js' --format br --threads 4
+      run: DotNetCompress -d AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/ -p '*.js' --format br --threads 4
 
     - name: Brotli Compress Output (wasm)
-      run: DotNetCompress -d src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/ -p '*.wasm' --format br --threads 4
+      run: DotNetCompress -d AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/ -p '*.wasm' --format br --threads 4
 
     - name: GZip Compress Output (dll)
-      run: DotNetCompress -d src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/managed -p '*.dll' --format gz --threads 4
+      run: DotNetCompress -d AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/managed -p '*.dll' --format gz --threads 4
 
     - name: GZip Compress Output (js)
-      run: DotNetCompress -d src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/ -p '*.js' --format gz --threads 4
+      run: DotNetCompress -d AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/ -p '*.js' --format gz --threads 4
 
     - name: GZip Compress Output (wasm)
-      run: DotNetCompress -d src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/ -p '*.wasm' --format gz --threads 4
+      run: DotNetCompress -d AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/ -p '*.wasm' --format gz --threads 4
 
     - name: Change base-tag in index.html from / to XamlPlayground
-      run: sed -i 's/<base href="\/" \/>/<base href="\/XamlPlayground\/" \/>/g' src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/index.html
+      run: sed -i 's/<base href="\/" \/>/<base href="\/XamlPlayground\/" \/>/g' AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/index.html
 
     - name: copy index.html to 404.html
-      run: cp src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/index.html src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/404.html
+      run: cp AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/index.html AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/404.html
 
     - name: Add .nojekyll file
-      run: touch src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/.nojekyll
+      run: touch AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/.nojekyll
 
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@4.1.7
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: src/XamlPlayground.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle
+        FOLDER: AvaloniaControls.WebAssembly/AvaloniaControls.WebAssembly.Browser/bin/Release/net8.0-browser/browser-wasm/AppBundle/
