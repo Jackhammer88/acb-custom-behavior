@@ -14,7 +14,7 @@
 
   <Grid RowDefinitions="Auto,*,*" VerticalAlignment="Center">
         <TextBlock Text="Тестирование поведения контрола" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="25 10">
             <AutoCompleteBox x:Name="ACB" ItemsSource="{Binding Items}"
                              FilterMode="Contains"
                              ValueMemberBinding="{Binding (models:TestModel).Name}"/>
